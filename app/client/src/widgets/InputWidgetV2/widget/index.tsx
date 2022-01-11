@@ -347,6 +347,8 @@ class InputWidget extends BaseInputWidget<InputWidgetProps, WidgetState> {
             parsedValue = null;
           } else if (value === "-") {
             parsedValue = "-";
+          } else if (/\.$/.test(value)) {
+            parsedValue = value;
           } else {
             parsedValue = Number(value);
 
