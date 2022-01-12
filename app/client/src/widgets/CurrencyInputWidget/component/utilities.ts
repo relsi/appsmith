@@ -1,3 +1,5 @@
+import { getLocale } from "utils/helpers";
+
 export const countryToFlag = (isoCode: string) => {
   return typeof String.fromCodePoint !== "undefined"
     ? isoCode
@@ -6,10 +8,6 @@ export const countryToFlag = (isoCode: string) => {
           String.fromCodePoint(char.charCodeAt(0) + 127397),
         )
     : isoCode;
-};
-
-export const getLocale = () => {
-  return navigator.languages?.[0] || "en-US";
 };
 
 /*
@@ -21,14 +19,15 @@ export const getLocale = () => {
 */
 export const formatCurrencyNumber = (decimalsInCurrency = 0, value: string) => {
   const fractionDigits = decimalsInCurrency || 0;
-  const currentIndexOfDecimal = value.indexOf(".");
+  const currentIndexOfDecimal = value.indexOf(getLocaleDecimalSeperator());
   const indexOfDecimal = value.length - fractionDigits - 1;
   const isDecimal =
-    value.includes(".") && currentIndexOfDecimal <= indexOfDecimal;
+    value.includes(getLocaleDecimalSeperator()) &&
+    currentIndexOfDecimal <= indexOfDecimal;
   const locale = getLocale();
   const formatter = new Intl.NumberFormat(locale, {
     style: "decimal",
-    minimumFractionDigits: isDecimal ? fractionDigits : 0,
+    maximumFractionDigits: isDecimal ? fractionDigits : 0,
   });
   const parsedValue = parseLocaleFormattedStringToNumber(value);
   return formatter.format(isNaN(parsedValue) ? 0 : parsedValue);
