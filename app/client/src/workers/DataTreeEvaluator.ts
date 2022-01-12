@@ -46,6 +46,7 @@ import {
   getParams,
   updateJSCollectionInDataTree,
   removeFunctionsAndVariableJSCollection,
+  isPrivateEntityPath,
 } from "workers/evaluationUtils";
 import _ from "lodash";
 import { applyChange, Diff, diff } from "deep-diff";
@@ -79,6 +80,7 @@ export default class DataTreeEvaluator {
   widgetConfigMap: WidgetTypeConfigMap = {};
   evalTree: DataTree = {};
   allKeys: Record<string, true> = {};
+  privateWidgets: Record<string, true> = {};
   oldUnEvalTree: DataTree = {};
   errors: EvalError[] = [];
   resolvedFunctions: Record<string, any> = {};
@@ -472,6 +474,17 @@ export default class DataTreeEvaluator {
     return dependencyMap;
   }
 
+  getPrivateWidgets(dataTree: DataTree): Record<string, true> {
+    let privateWidgets = {};
+    Object.keys(dataTree).forEach((entityName) => {
+      const entity = dataTree[entityName];
+      if (isWidget(entity) && entity.privateWidgets) {
+        privateWidgets = { ...privateWidgets, ...entity.privateWidgets };
+      }
+    });
+    return privateWidgets;
+  }
+
   listEntityDependencies(
     entity: DataTreeWidget | DataTreeAction | DataTreeJSAction,
     entityName: string,
@@ -557,9 +570,13 @@ export default class DataTreeEvaluator {
     sortedDependencies: Array<string>,
   ): DataTree {
     const tree = _.cloneDeep(oldUnevalTree);
+    this.privateWidgets = this.getPrivateWidgets(oldUnevalTree);
     try {
       return sortedDependencies.reduce(
         (currentTree: DataTree, fullPropertyPath: string) => {
+          // do not evaluate private entities
+          if (isPrivateEntityPath(this.privateWidgets, fullPropertyPath))
+            return currentTree;
           const { entityName, propertyPath } = getEntityNameAndPropertyPath(
             fullPropertyPath,
           );
