@@ -224,7 +224,7 @@ const InputComponentWrapper = styled((props) => (
         return `
           > {
             input:not(:first-child) {
-              padding-left: 5px;
+              padding-left: 10px;
             }
             .currency-type-filter,
             .currency-type-trigger,

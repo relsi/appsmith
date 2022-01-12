@@ -53,7 +53,7 @@ class BaseInputWidget<
             propertyName: "errorMessage",
             label: "Error Message",
             controlType: "INPUT_TEXT",
-            placeholderText: "Not a valid email!",
+            placeholderText: "Not a valid value!",
             isBindProperty: true,
             isTriggerProperty: false,
             validation: { type: ValidationTypes.TEXT },

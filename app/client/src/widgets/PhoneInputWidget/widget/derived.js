@@ -38,8 +38,6 @@ export default {
         */
         parsedRegex = new RegExp(regexParts[2], regexParts[3]);
       }
-    } else {
-      parsedRegex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
     }
 
     if (parsedRegex) {

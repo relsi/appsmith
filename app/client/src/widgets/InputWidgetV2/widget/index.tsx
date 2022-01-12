@@ -208,7 +208,12 @@ class InputWidget extends BaseInputWidget<InputWidgetProps, WidgetState> {
               placeholderText: "255",
               isBindProperty: true,
               isTriggerProperty: false,
-              validation: { type: ValidationTypes.NUMBER },
+              validation: {
+                type: ValidationTypes.NUMBER,
+                params: {
+                  min: 1,
+                },
+              },
               hidden: (props: InputWidgetProps) => {
                 return props.inputType !== InputTypes.TEXT;
               },
@@ -461,7 +466,7 @@ class InputWidget extends BaseInputWidget<InputWidgetProps, WidgetState> {
   }
 
   static getWidgetType(): WidgetType {
-    return "INPUT_WIDGET_v2";
+    return "INPUT_WIDGET_V2";
   }
 }
 
