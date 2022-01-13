@@ -27,7 +27,6 @@ export default {
     }
 
     if (!props.isRequired && isEmpty) {
-      console.log("test");
       return true;
     }
     if (props.isRequired && !hasValidValue) {

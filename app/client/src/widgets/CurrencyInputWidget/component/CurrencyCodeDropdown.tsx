@@ -71,7 +71,7 @@ const CurrencyIconWrapper = styled.span`
   border-right-color: initial;
   padding: 6px 12px 0px 12px;
 
-  &&& + input {
+  &&&&& + input {
     padding-left: 10px;
   }
 `;
