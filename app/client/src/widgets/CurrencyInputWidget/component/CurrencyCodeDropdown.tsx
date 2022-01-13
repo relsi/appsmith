@@ -24,7 +24,7 @@ const DropdownContainer = styled.div`
     border-right-color: initial;
   }
 
-  &&& + input {
+  &&&&& + input {
     padding-left: 10px;
   }
 `;
@@ -43,13 +43,13 @@ const DropdownTriggerIconWrapper = styled.div`
     margin-left: 5px;
   }
 
-  .dropdown {
+  &&& .dropdown {
     svg {
       width: 14px;
       height: 14px;
 
       path {
-        fill: ${Colors.GREY_10} !important;
+        fill: ${Colors.GREY_10};
       }
     }
   }
@@ -133,12 +133,13 @@ export const getCountryCodeFromCurrencyCode = (currencyCode?: string) => {
 interface CurrencyDropdownProps {
   onCurrencyTypeChange: (currencyCountryCode?: string) => void;
   options: Array<DropdownOption>;
-  selected: DropdownOption;
+  selected?: string;
   allowCurrencyChange?: boolean;
 }
 
 export default function CurrencyTypeDropdown(props: CurrencyDropdownProps) {
-  const selectedCurrency = getSelectedCurrency(props.selected.value).id;
+  const selectedOption = getSelectedCurrency(props.selected);
+  const selectedCurrency = selectedOption.id;
   if (!props.allowCurrencyChange) {
     return (
       <CurrencyIconWrapper className="currency-type-trigger">
@@ -164,7 +165,7 @@ export default function CurrencyTypeDropdown(props: CurrencyDropdownProps) {
         optionWidth="340px"
         options={props.options}
         searchPlaceholder="Search by currency or country"
-        selected={props.selected}
+        selected={selectedOption}
         showLabelOnly
       />
     </DropdownContainer>

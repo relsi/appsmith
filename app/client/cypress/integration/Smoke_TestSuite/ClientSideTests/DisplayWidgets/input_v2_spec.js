@@ -25,7 +25,9 @@ describe("Input widget V2 - ", () => {
       function enterAndTest(text, expected) {
         cy.get(`.t--widget-${widgetName} input`).clear();
         cy.wait(300);
-        cy.get(`.t--widget-${widgetName} input`).type(text);
+        if (text) {
+          cy.get(`.t--widget-${widgetName} input`).type(text);
+        }
         cy.get(".t--widget-textwidget").should("contain", expected);
       }
 
@@ -33,7 +35,6 @@ describe("Input widget V2 - ", () => {
         "test:test:true",
         "test123:test123:true",
         "123:123:true",
-        "-:-:true",
         "::true",
         "$100.22:$100.22:true",
         "test@appsmith.com:test@appsmith.com:true",
@@ -41,7 +42,9 @@ describe("Input widget V2 - ", () => {
 
       cy.openPropertyPane(widgetName);
 
-      cy.get(".t--property-control-required label").click({ force: true });
+      cy.get(".t--property-control-required label")
+        .last()
+        .click({ force: true });
 
       [
         "test:test:true",

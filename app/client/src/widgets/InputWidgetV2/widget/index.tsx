@@ -13,7 +13,6 @@ import {
   INPUT_DEFAULT_TEXT_MAX_CHAR_ERROR,
 } from "constants/messages";
 import { DerivedPropertiesMap } from "utils/WidgetFactory";
-import { InputTypes } from "../constants";
 import { GRID_DENSITY_MIGRATION_V1 } from "widgets/constants";
 import { AutocompleteDataType } from "utils/autocomplete/TernServer";
 import BaseInputWidget from "widgets/BaseInputWidget";
@@ -21,6 +20,7 @@ import _, { isNil } from "lodash";
 import derivedProperties from "./parsedDerivedProperties";
 import { BaseInputWidgetProps } from "widgets/BaseInputWidget/widget";
 import { mergeWidgetConfig } from "utils/helpers";
+import { InputTypes } from "widgets/BaseInputWidget/constants";
 
 export function defaultValueValidation(
   value: any,
@@ -165,9 +165,6 @@ function maxValueValidation(max: any, props: InputWidgetProps, _?: any) {
   }
 }
 class InputWidget extends BaseInputWidget<InputWidgetProps, WidgetState> {
-  constructor(props: InputWidgetProps) {
-    super(props);
-  }
   static getPropertyPaneConfig() {
     return mergeWidgetConfig(
       [

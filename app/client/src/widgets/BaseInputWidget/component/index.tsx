@@ -76,11 +76,6 @@ const InputComponentWrapper = styled((props) => (
       display: inline-block;
       left: 0;
       z-index: 16;
-      svg {
-        path {
-          fill: ${(props) => props.theme.colors.icon?.hover};
-        }
-      }
       &:hover {
         border: 1px solid ${Colors.GREY_5} !important;
       }

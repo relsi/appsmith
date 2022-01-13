@@ -12,10 +12,10 @@ export const countryToFlag = (isoCode: string) => {
 
 /*
  Returns formatted value with maximum number of decimals based on decimalsInCurrency value 
- and add commas based on user's local browser
+ and add commas based on user's locale
   for eg:
-  a) (2, 1235.456) will return 1,234.56 
-  b) (1, 1234.456) will return 1,234.5
+  a) (2, 1235.456) will return 1,235.45 
+  b) (1, 1234.456) will return 1,234.4
 */
 export const formatCurrencyNumber = (decimalsInCurrency = 0, value: string) => {
   const fractionDigits = decimalsInCurrency || 0;
@@ -36,8 +36,8 @@ export const formatCurrencyNumber = (decimalsInCurrency = 0, value: string) => {
 /*
  Returns value in string format with maximum number of decimals based on decimalsInCurrency value
   for eg:
-  a) (2, 1235.456) will return 1234.56 
-  b) (1, 1234.456) will return 1234.5
+  a) (2, 1235.456) will return 1235.45 
+  b) (1, 1234.456) will return 1234.4
 */
 export const limitDecimalValue = (decimals = 0, value = "") => {
   const decimalSeperator = getLocaleDecimalSeperator();

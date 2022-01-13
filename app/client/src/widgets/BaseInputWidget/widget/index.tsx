@@ -9,9 +9,8 @@ import {
 } from "constants/AppsmithActionConstants/ActionConstants";
 import { ValidationTypes } from "constants/WidgetValidation";
 import { DerivedPropertiesMap } from "utils/WidgetFactory";
-import { InputType } from "../constants";
 import BaseInputComponent from "../component";
-import { InputTypes } from "widgets/InputWidgetV2/constants";
+import { InputTypes } from "../constants";
 
 class BaseInputWidget<
   T extends BaseInputWidgetProps,
@@ -383,7 +382,7 @@ export interface BaseInputValidator {
   errorMessage: string;
 }
 export interface BaseInputWidgetProps extends WidgetProps {
-  inputType: InputType;
+  inputType: InputTypes;
   tooltip?: string;
   isDisabled?: boolean;
   validation: boolean;
